@@ -18,18 +18,6 @@
 
 ---
 
-### 📊 Comprehensive Business Automation Dashboard | لوحة التحكم الكاملة بالأتمتة التشغيلية
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│  📥 Google Forms Submit  ──>  🌀 Financial Vortex ──>  📁 Auto-Router   │
-├────────────────────────────────────────────────────────────────────────┤
-│  ⚡ Payment Voucher      ──>  🔢 Auto-Serial 6800+ ──>  📝 Local Log    │
-│  ⚡ Receipt Voucher      ──>  🔢 Auto-Serial 2639+ ──>  📊 Income Sheet │
-│  ⚡ Media Workflow       ──>  📂 Drive Ingestion   ──>  🎬 Sorter Hub   │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
 </div>
 
 ---
