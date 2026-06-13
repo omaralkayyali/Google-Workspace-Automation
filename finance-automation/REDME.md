@@ -1,4 +1,4 @@
-# 🧾 Automated Financial Workspace Ecosystem
+# 🧾 Automated Financial Workspace Ecosystem | النظام المالي المؤتمت متكامل الخدمات
 
 <div align="center">
 
@@ -11,24 +11,30 @@
 
 ---
 
+## 📖 Overview / نظرة عامة
+
+### [English]
 An advanced, production-ready financial management and automation system powered by **Google Apps Script (GAS)**, **Google Sheets**, and **Google Forms**. This pipeline fully digitizes corporate and organizational workflows for handling diverse financial documents with zero manual intervention.
 
----
-
-## 🚀 Core Features
-
-* **🔢 Multi-Series Auto-Numbering:** Generates independent, sequential, and customizable serial configurations across different voucher types ($6800+$ series, $2639+$ series, and base $1+$ sequences).
-* **📂 Dynamic Month-Based Routing:** Automatically parses submission timestamps and distributes entries into specific monthly spreadsheets (e.g., `دخل يناير`, `مصاريف فبراير`).
-* **🛡️ Production-Safe Architecture:** Designed to fully abstract sensitive Google Spreadsheet IDs using deployment environment placeholders, preventing credential leaks in public repositories.
-* **🛠️ Fault-Tolerant Schema Enforcement:** Automatically detects missing tracking structures and appends column headers dynamically on the fly.
+### [العربية]
+نظام متقدم وجاهز للعمل الفوري لأتمتة وإدارة العمليات الماليّة والمصاريف، يعتمد بالكامل على **Google Apps Script (GAS)**، **Google Sheets**، و **Google Forms**. يقوم هذا النظام بربط وحوسبة تدفق البيانات الماليّة (سندات القبض، سندات الصرف، وطلبات الصرف) وتنظيمها تلقائياً دون أي تدخل يدوي.
 
 ---
 
-## 📁 Repository Structure
+## 🚀 Core Features / الميزات الأساسية
+
+* **🔢 Multi-Series Auto-Numbering | ترقيم تسلسلي متعدد الفئات:** Generates independent, sequential, and customizable serial configurations across different voucher types ($6800+$ series, $2639+$ series, and base $1+$ sequences).
+* **📂 Dynamic Month-Based Routing | توجيه ديناميكي شهري:** Automatically parses submission timestamps and distributes entries into specific monthly spreadsheets (e.g., `دخل يناير`, `مصاريف فبراير`).
+* **🛡️ Production-Safe Architecture | بنية برمجية آمنة:** Designed to fully abstract sensitive Google Spreadsheet IDs using deployment environment placeholders, preventing credential leaks in public repositories.
+* **🛠️ Fault-Tolerant Schema Enforcement | معالجة تلقائية للأخطاء:** Automatically detects missing tracking structures and appends column headers dynamically on the fly.
+
+---
+
+## 📁 Repository Structure / هيكلية المجلدات
 
 ```text
 ├── src/
-│   ├── PaymentVoucher.gs         # 💸 Outgoing Expense Voucher Automation (6800+ Series)
-│   ├── ReceiptVoucher.gs         # 💰 Incoming Revenue Voucher Sorting (2639+ Series)
-│   └── DisbursementRequest.gs    # 📝 Internal Funds Approval & Routing (1+ Base Series)
-└── README.md                     # 📖 System Documentation & Deployment Guide
+│   ├── PaymentVoucher.gs         # 💸 Outgoing Expense Voucher Automation (6800+ Series) / كود سند الصرف
+│   ├── ReceiptVoucher.gs         # 💰 Incoming Revenue Voucher Sorting (2639+ Series) / كود سند القبض
+│   └── DisbursementRequest.gs    # 📝 Internal Funds Approval & Routing (1+ Base Series) / كود طلب الصرف
+└── README.md                     # 📖 System Documentation & Deployment Guide / ملف الوصف الرئيسي
