@@ -36,8 +36,8 @@ An advanced, production-ready financial management and automation system powered
 
 ```text
 ├── src/
-│   ├── PaymentVoucher.gs          # 💸 Outgoing Expense Voucher Automation (6800+ Series) / كود سند الصرف
-│   ├── ReceiptVoucher.gs          # 💰 Incoming Revenue Voucher Sorting (2639+ Series) / كود سند القبض
-│   ├── DisbursementRequest.gs     # 📝 Internal Funds Approval & Routing (1+ Base Series) / كود طلب الصرف
-│   └── GeneralFinancialReport.gs  # 📊 Income Routing & Annual Balance Consolidation / التقرير المالي العام والمطابقة
+│   ├── PaymentVoucher.js          # 💸 Outgoing Expense Voucher Automation (6800+ Series) / كود سند الصرف
+│   ├── ReceiptVoucher.js          # 💰 Incoming Revenue Voucher Sorting (2639+ Series) / كود سند القبض
+│   ├── DisbursementRequest.js     # 📝 Internal Funds Approval & Routing (1+ Base Series) / كود طلب الصرف
+│   └── GeneralFinancialReport.js  # 📊 Income Routing & Annual Balance Consolidation / التقرير المالي العام والمطابقة
 └── README.md                      # 📖 System Documentation & Deployment Guide / ملف الوصف الرئيسي
