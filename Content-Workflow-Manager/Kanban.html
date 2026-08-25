@@ -1,0 +1,2372 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+
+<head>
+  <base target="_top">
+
+
+  <meta charset="UTF-8">
+
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+
+  <style>
+
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+
+      background:
+        linear-gradient(
+          135deg,
+          #f8fafc 0%,
+          #eef2f7 100%
+        );
+
+
+      color: #1f2937;
+
+
+      overflow: hidden;
+    }
+
+
+
+
+    /* =====================================================
+       APP CONTAINER
+    ===================================================== */
+
+
+    .app-shell {
+      width: 100%;
+      height: 100vh;
+
+
+      display: flex;
+      flex-direction: column;
+
+
+      overflow: hidden;
+    }
+
+
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+
+    .header {
+
+
+      flex-shrink: 0;
+
+
+      background:
+        linear-gradient(
+          135deg,
+          #7a1022 0%,
+          #8f1830 50%,
+          #a21d39 100%
+        );
+
+
+      color: white;
+
+
+      padding:
+        22px
+        28px
+        20px;
+
+
+      box-shadow:
+        0 4px 20px
+        rgba(122, 16, 34, .18);
+
+
+      position: relative;
+
+
+      z-index: 20;
+    }
+
+
+
+
+    .header-top {
+
+
+      display: flex;
+
+
+      align-items: center;
+
+
+      justify-content: space-between;
+
+
+      gap: 20px;
+    }
+
+
+
+
+    .title {
+
+
+      font-size: 26px;
+
+
+      font-weight: 800;
+
+
+      letter-spacing: -.3px;
+    }
+
+
+
+
+    .subtitle {
+
+
+      font-size: 14px;
+
+
+      opacity: .82;
+
+
+      margin-top: 6px;
+    }
+
+
+
+
+    .refresh-btn {
+
+
+      border: 1px solid
+        rgba(255,255,255,.28);
+
+
+      background:
+        rgba(255,255,255,.13);
+
+
+      color: white;
+
+
+      padding:
+        11px
+        18px;
+
+
+      border-radius: 10px;
+
+
+      font-size: 14px;
+
+
+      font-weight: 700;
+
+
+      cursor: pointer;
+
+
+      transition:
+        .2s ease;
+
+
+      backdrop-filter:
+        blur(10px);
+    }
+
+
+
+
+    .refresh-btn:hover {
+
+
+      background:
+        rgba(255,255,255,.22);
+
+
+      transform:
+        translateY(-1px);
+    }
+
+
+
+
+    /* =====================================================
+       STATS
+    ===================================================== */
+
+
+    .stats {
+
+
+      display: grid;
+
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+
+      gap: 14px;
+
+
+      margin-top: 20px;
+    }
+
+
+
+
+    .stat {
+
+
+      background:
+        rgba(255,255,255,.12);
+
+
+      border:
+        1px solid
+        rgba(255,255,255,.14);
+
+
+      border-radius: 14px;
+
+
+      padding:
+        12px
+        18px;
+
+
+      text-align: center;
+
+
+      backdrop-filter:
+        blur(8px);
+    }
+
+
+
+
+    .stat-number {
+
+
+      font-size: 25px;
+
+
+      font-weight: 800;
+    }
+
+
+
+
+    .stat-label {
+
+
+      font-size: 12px;
+
+
+      opacity: .82;
+
+
+      margin-top: 4px;
+    }
+
+
+
+
+    /* =====================================================
+       BOARD WRAPPER
+    ===================================================== */
+
+
+    .board-wrapper {
+
+
+      flex: 1;
+
+
+      min-height: 0;
+
+
+      width: 100%;
+
+
+      padding:
+        22px 24px 26px;
+
+
+      overflow-x: auto;
+
+
+      overflow-y: hidden;
+
+
+      scrollbar-width: thin;
+
+
+      scrollbar-color:
+        #cbd5e1
+        transparent;
+    }
+
+
+
+
+    .board-wrapper::-webkit-scrollbar {
+
+
+      height: 10px;
+    }
+
+
+
+
+    .board-wrapper::-webkit-scrollbar-track {
+
+
+      background: transparent;
+    }
+
+
+
+
+    .board-wrapper::-webkit-scrollbar-thumb {
+
+
+      background: #cbd5e1;
+
+
+      border-radius: 20px;
+    }
+
+
+
+
+    /* =====================================================
+       BOARD
+    ===================================================== */
+
+
+    .board {
+
+
+      display: flex;
+
+
+      flex-direction: row;
+
+
+      gap: 18px;
+
+
+      align-items: stretch;
+
+
+      height: 100%;
+
+
+      min-width: max-content;
+    }
+
+
+
+
+    /* =====================================================
+       COLUMN
+    ===================================================== */
+
+
+    .column {
+
+
+      flex: 0 0 330px;
+
+
+      width: 330px;
+
+
+      height: 100%;
+
+
+      min-height: 0;
+
+
+      background:
+        rgba(226,232,240,.82);
+
+
+      border:
+        1px solid
+        #d9e0e8;
+
+
+      border-radius: 18px;
+
+
+      padding: 14px;
+
+
+      display: flex;
+
+
+      flex-direction: column;
+
+
+      transition:
+        background .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+    }
+
+
+
+
+    .column:hover {
+
+
+      box-shadow:
+        0 8px 25px
+        rgba(15,23,42,.07);
+    }
+
+
+
+
+    .column.drag-over {
+
+
+      background:
+        #dbeafe;
+
+
+      outline:
+        3px solid
+        #1e3a8a;
+
+
+      outline-offset:
+        -3px;
+    }
+
+
+
+
+    /* =====================================================
+       COLUMN HEADER
+    ===================================================== */
+
+
+    .column-header {
+
+
+      flex-shrink: 0;
+
+
+      display: flex;
+
+
+      align-items: center;
+
+
+      justify-content: space-between;
+
+
+      gap: 10px;
+
+
+      padding:
+        8px
+        5px
+        15px;
+    }
+
+
+
+
+    .column-title {
+
+
+      font-size: 15px;
+
+
+      font-weight: 800;
+
+
+      color: #334155;
+    }
+
+
+
+
+    .count {
+
+
+      background:
+        white;
+
+
+      color:
+        #7a1022;
+
+
+      border:
+        1px solid
+        #e2e8f0;
+
+
+      border-radius:
+        999px;
+
+
+      min-width:
+        32px;
+
+
+      height:
+        28px;
+
+
+      display:
+        flex;
+
+
+      align-items:
+        center;
+
+
+      justify-content:
+        center;
+
+
+      padding:
+        0 9px;
+
+
+      font-size:
+        12px;
+
+
+      font-weight:
+        800;
+
+
+      box-shadow:
+        0 2px 5px
+        rgba(0,0,0,.05);
+    }
+
+
+
+
+    /* =====================================================
+       CARDS CONTAINER
+    ===================================================== */
+
+
+    .cards {
+
+
+      flex: 1;
+
+
+      min-height: 0;
+
+
+      overflow-y: auto;
+
+
+      display: flex;
+
+
+      flex-direction: column;
+
+
+      gap: 12px;
+
+
+      padding:
+        2px
+        3px
+        10px;
+
+
+      scrollbar-width: thin;
+
+
+      scrollbar-color:
+        #cbd5e1
+        transparent;
+    }
+
+
+
+
+    .cards::-webkit-scrollbar {
+
+
+      width: 7px;
+    }
+
+
+
+
+    .cards::-webkit-scrollbar-thumb {
+
+
+      background:
+        #cbd5e1;
+
+
+      border-radius:
+        20px;
+    }
+
+
+
+
+    /* =====================================================
+       CARD
+    ===================================================== */
+
+
+    .card {
+
+
+      flex-shrink: 0;
+
+
+      background:
+        #ffffff;
+
+
+      border-radius:
+        14px;
+
+
+      padding:
+        16px;
+
+
+      box-shadow:
+        0 3px 12px
+        rgba(15,23,42,.07);
+
+
+      cursor:
+        grab;
+
+
+      border-right:
+        5px solid
+        #7a1022;
+
+
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        opacity .18s ease;
+
+
+      user-select:
+        none;
+    }
+
+
+
+
+    .card:hover {
+
+
+      transform:
+        translateY(-3px);
+
+
+      box-shadow:
+        0 9px 24px
+        rgba(15,23,42,.12);
+    }
+
+
+
+
+    .card:active {
+
+
+      cursor:
+        grabbing;
+    }
+
+
+
+
+    .card.dragging {
+
+
+      opacity:
+        .45;
+
+
+      transform:
+        rotate(1deg)
+        scale(.98);
+    }
+
+
+
+
+    /* =====================================================
+       CARD CONTENT
+    ===================================================== */
+
+
+    .card-title {
+
+
+      font-size:
+        15px;
+
+
+      font-weight:
+        800;
+
+
+      line-height:
+        1.7;
+
+
+      margin-bottom:
+        12px;
+
+
+      color:
+        #111827;
+
+
+      word-break:
+        break-word;
+    }
+
+
+
+
+    .card-meta {
+
+
+      display:
+        flex;
+
+
+      flex-direction:
+        column;
+
+
+      gap:
+        7px;
+    }
+
+
+
+
+    .meta {
+
+
+      font-size:
+        12px;
+
+
+      color:
+        #64748b;
+
+
+      display:
+        flex;
+
+
+      align-items:
+        center;
+
+
+      gap:
+        6px;
+
+
+      line-height:
+        1.4;
+    }
+
+
+
+
+    .badge {
+
+
+      display:
+        inline-flex;
+
+
+      align-items:
+        center;
+
+
+      width:
+        fit-content;
+
+
+      background:
+        #eef2ff;
+
+
+      color:
+        #1e3a8a;
+
+
+      padding:
+        5px
+        9px;
+
+
+      border-radius:
+        7px;
+
+
+      font-size:
+        11px;
+
+
+      font-weight:
+        700;
+    }
+
+
+
+
+    .late {
+
+
+      background:
+        #fee2e2;
+
+
+      color:
+        #b91c1c;
+    }
+
+
+
+
+    /* =====================================================
+       STATUS COLORS
+    ===================================================== */
+
+
+    .published {
+
+
+      border-right-color:
+        #16a34a;
+    }
+
+
+
+
+    .idea {
+
+
+      border-right-color:
+        #64748b;
+    }
+
+
+
+
+    .writing {
+
+
+      border-right-color:
+        #f59e0b;
+    }
+
+
+
+
+    .design {
+
+
+      border-right-color:
+        #8b5cf6;
+    }
+
+
+
+
+    .ready {
+
+
+      border-right-color:
+        #1e3a8a;
+    }
+
+
+
+
+    .archived {
+
+
+      border-right-color:
+        #64748b;
+    }
+
+
+
+
+    .cancelled {
+
+
+      border-right-color:
+        #dc2626;
+    }
+
+
+
+
+    /* =====================================================
+       EMPTY
+    ===================================================== */
+
+
+    .empty {
+
+
+      min-height:
+        120px;
+
+
+      display:
+        flex;
+
+
+      align-items:
+        center;
+
+
+      justify-content:
+        center;
+
+
+      color:
+        #94a3b8;
+
+
+      font-size:
+        13px;
+
+
+      border:
+        2px dashed
+        #cbd5e1;
+
+
+      border-radius:
+        12px;
+
+
+      margin:
+        3px;
+    }
+
+
+
+
+    /* =====================================================
+       LOADING
+    ===================================================== */
+
+
+    .loading {
+
+
+      width:
+        100%;
+
+
+      height:
+        100%;
+
+
+      min-height:
+        300px;
+
+
+      display:
+        flex;
+
+
+      align-items:
+        center;
+
+
+      justify-content:
+        center;
+
+
+      color:
+        #64748b;
+
+
+      font-size:
+        15px;
+    }
+
+
+
+
+    /* =====================================================
+       ERROR
+    ===================================================== */
+
+
+    .error {
+
+
+      margin:
+        20px;
+
+
+      padding:
+        16px;
+
+
+      background:
+        #fee2e2;
+
+
+      color:
+        #991b1b;
+
+
+      border:
+        1px solid
+        #fecaca;
+
+
+      border-radius:
+        12px;
+
+
+      font-size:
+        13px;
+    }
+
+
+
+
+    /* =====================================================
+       LARGE SCREENS
+    ===================================================== */
+
+
+    @media (min-width: 1600px) {
+
+
+      .column {
+
+
+        flex-basis:
+          360px;
+
+
+        width:
+          360px;
+      }
+
+
+      .card-title {
+
+
+        font-size:
+          16px;
+      }
+
+
+      .column-title {
+
+
+        font-size:
+          16px;
+      }
+    }
+
+
+
+
+    /* =====================================================
+       MEDIUM SCREENS
+    ===================================================== */
+
+
+    @media (max-width: 900px) {
+
+
+      .header {
+
+
+        padding:
+          16px;
+      }
+
+
+      .title {
+
+
+        font-size:
+          21px;
+      }
+
+
+      .board-wrapper {
+
+
+        padding:
+          14px;
+      }
+
+
+      .column {
+
+
+        flex-basis:
+          300px;
+
+
+        width:
+          300px;
+      }
+    }
+
+
+
+
+    /* =====================================================
+       SMALL SCREENS
+    ===================================================== */
+
+
+    @media (max-width: 600px) {
+
+
+      .header-top {
+
+
+        align-items:
+          flex-start;
+      }
+
+
+      .stats {
+
+
+        gap:
+          7px;
+      }
+
+
+      .stat {
+
+
+        padding:
+          9px 5px;
+      }
+
+
+      .stat-number {
+
+
+        font-size:
+          19px;
+      }
+
+
+      .stat-label {
+
+
+        font-size:
+          10px;
+      }
+
+
+      .column {
+
+
+        flex-basis:
+          280px;
+
+
+        width:
+          280px;
+      }
+    }
+
+
+  </style>
+
+
+</head>
+
+
+
+
+<body>
+
+
+<div class="app-shell">
+
+
+
+
+  <!-- ===================================================
+       HEADER
+  ==================================================== -->
+
+
+  <div class="header">
+
+
+    <div class="header-top">
+
+
+      <div>
+
+
+        <div class="title">
+          🎯 لوحة Kanban
+        </div>
+
+
+        <div class="subtitle">
+          إدارة سير المحتوى ومتابعة حالة المنشورات
+        </div>
+
+
+      </div>
+
+
+
+
+      <button
+        class="refresh-btn"
+        onclick="loadBoard()"
+      >
+        ↻ تحديث
+      </button>
+
+
+    </div>
+
+
+
+
+    <!-- =================================================
+         STATS
+    ================================================== -->
+
+
+    <div class="stats">
+
+
+      <div class="stat">
+
+
+        <div
+          id="total"
+          class="stat-number"
+        >
+          0
+        </div>
+
+
+        <div class="stat-label">
+          إجمالي المحتوى
+        </div>
+
+
+      </div>
+
+
+
+
+      <div class="stat">
+
+
+        <div
+          id="published"
+          class="stat-number"
+        >
+          0
+        </div>
+
+
+        <div class="stat-label">
+          تم النشر
+        </div>
+
+
+      </div>
+
+
+
+
+      <div class="stat">
+
+
+        <div
+          id="late"
+          class="stat-number"
+        >
+          0
+        </div>
+
+
+        <div class="stat-label">
+          متأخر
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+  <!-- ===================================================
+       BOARD
+  ==================================================== -->
+
+
+  <div
+    id="app"
+    class="board-wrapper"
+  >
+
+
+    <div class="loading">
+      جاري تحميل لوحة Kanban...
+    </div>
+
+
+  </div>
+
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+  let boardData = null;
+
+
+  let draggedCard = null;
+
+
+
+
+  /* =====================================================
+     LOAD BOARD
+  ===================================================== */
+
+
+  function loadBoard() {
+
+
+    document.getElementById('app').innerHTML = `
+      <div class="loading">
+        جاري تحديث اللوحة...
+      </div>
+    `;
+
+
+
+
+    google.script.run
+
+
+      .withSuccessHandler(renderBoard)
+
+
+      .withFailureHandler(showError)
+
+
+      .getKanbanData();
+  }
+
+
+
+
+  /* =====================================================
+     RENDER BOARD
+  ===================================================== */
+
+
+  function renderBoard(data) {
+
+
+    boardData = data;
+
+
+
+
+    const app =
+      document.getElementById('app');
+
+
+
+
+    const board =
+      document.createElement('div');
+
+
+
+
+    board.className =
+      'board';
+
+
+
+
+    data.statuses.forEach(status => {
+
+
+
+
+      const column =
+        document.createElement('div');
+
+
+
+
+      column.className =
+        'column';
+
+
+
+
+      column.dataset.status =
+        status;
+
+
+
+
+      const items =
+        data.items.filter(
+          item =>
+            item.status === status
+        );
+
+
+
+
+      column.innerHTML = `
+
+
+        <div class="column-header">
+
+
+          <div class="column-title">
+            ${escapeHtml(status)}
+          </div>
+
+
+          <div class="count">
+            ${items.length}
+          </div>
+
+
+        </div>
+
+
+        <div class="cards"></div>
+
+
+      `;
+
+
+
+
+      const cardsContainer =
+        column.querySelector('.cards');
+
+
+
+
+      if (items.length === 0) {
+
+
+        cardsContainer.innerHTML = `
+
+
+          <div class="empty">
+            لا يوجد محتوى
+          </div>
+
+
+        `;
+
+
+      } else {
+
+
+        items.forEach(item => {
+
+
+          cardsContainer.appendChild(
+            createCard(item)
+          );
+
+
+        });
+
+
+      }
+
+
+
+
+      setupDropZone(column);
+
+
+
+
+      board.appendChild(column);
+
+
+    });
+
+
+
+
+    app.innerHTML = '';
+
+
+
+
+    app.appendChild(board);
+
+
+
+
+    updateStats(data.items);
+  }
+
+
+
+
+  /* =====================================================
+     CREATE CARD
+  ===================================================== */
+
+
+  function createCard(item) {
+
+
+    const card =
+      document.createElement('div');
+
+
+
+
+    card.className =
+      'card ' +
+      getStatusClass(item.status);
+
+
+
+
+    card.draggable =
+      true;
+
+
+
+
+    card.dataset.row =
+      item.row;
+
+
+
+
+    card.innerHTML = `
+
+
+      <div class="card-title">
+
+
+        ${escapeHtml(item.title)}
+
+
+      </div>
+
+
+
+
+      <div class="card-meta">
+
+
+
+
+        ${
+          item.id !== ''
+            ? `
+              <span class="badge">
+                #${escapeHtml(
+                  String(item.id)
+                )}
+              </span>
+            `
+            : ''
+        }
+
+
+
+
+        ${
+          item.publishDate
+            ? `
+              <div class="meta">
+                📅
+                ${escapeHtml(
+                  item.publishDate
+                )}
+              </div>
+            `
+            : ''
+        }
+
+
+
+
+        ${
+          item.platform
+            ? `
+              <div class="meta">
+                📱
+                ${escapeHtml(
+                  String(item.platform)
+                )}
+              </div>
+            `
+            : ''
+        }
+
+
+
+
+        ${
+          item.type
+            ? `
+              <div class="meta">
+                🏷️
+                ${escapeHtml(
+                  String(item.type)
+                )}
+              </div>
+            `
+            : ''
+        }
+
+
+
+
+        ${
+          item.delay !== '' &&
+          Number(item.delay) > 0
+
+
+            ? `
+              <span class="badge late">
+                🔴 متأخر
+                ${escapeHtml(
+                  String(item.delay)
+                )}
+                يوم
+              </span>
+            `
+
+
+            : ''
+        }
+
+
+
+
+        ${
+          item.remaining !== '' &&
+          Number(item.remaining) >= 0
+
+
+            ? `
+              <div class="meta">
+                ⏳
+                متبقي
+                ${escapeHtml(
+                  String(item.remaining)
+                )}
+                يوم
+              </div>
+            `
+
+
+            : ''
+        }
+
+
+      </div>
+
+
+    `;
+
+
+
+
+    card.addEventListener(
+      'dragstart',
+      handleDragStart
+    );
+
+
+
+
+    card.addEventListener(
+      'dragend',
+      handleDragEnd
+    );
+
+
+
+
+    return card;
+  }
+
+
+
+
+  /* =====================================================
+     DRAG START
+  ===================================================== */
+
+
+  function handleDragStart(event) {
+
+
+    draggedCard =
+      event.currentTarget;
+
+
+
+
+    draggedCard.classList.add(
+      'dragging'
+    );
+
+
+
+
+    event.dataTransfer.effectAllowed =
+      'move';
+
+
+
+
+    event.dataTransfer.setData(
+      'text/plain',
+      draggedCard.dataset.row
+    );
+  }
+
+
+
+
+  /* =====================================================
+     DRAG END
+  ===================================================== */
+
+
+  function handleDragEnd() {
+
+
+    if (draggedCard) {
+
+
+      draggedCard.classList.remove(
+        'dragging'
+      );
+
+
+    }
+
+
+
+
+    document
+      .querySelectorAll('.column')
+      .forEach(column => {
+
+
+        column.classList.remove(
+          'drag-over'
+        );
+
+
+      });
+
+
+
+
+    draggedCard = null;
+  }
+
+
+
+
+  /* =====================================================
+     DROP ZONE
+  ===================================================== */
+
+
+  function setupDropZone(column) {
+
+
+
+
+    column.addEventListener(
+      'dragover',
+      event => {
+
+
+        event.preventDefault();
+
+
+        column.classList.add(
+          'drag-over'
+        );
+
+
+      }
+    );
+
+
+
+
+    column.addEventListener(
+      'dragleave',
+      event => {
+
+
+        if (
+          !column.contains(
+            event.relatedTarget
+          )
+        ) {
+
+
+          column.classList.remove(
+            'drag-over'
+          );
+
+
+        }
+
+
+      }
+    );
+
+
+
+
+    column.addEventListener(
+      'drop',
+      event => {
+
+
+        event.preventDefault();
+
+
+
+
+        column.classList.remove(
+          'drag-over'
+        );
+
+
+
+
+        if (!draggedCard)
+          return;
+
+
+
+
+        const row =
+          Number(
+            draggedCard.dataset.row
+          );
+
+
+
+
+        const newStatus =
+          column.dataset.status;
+
+
+
+
+        const oldStatus =
+          findItem(row)?.status;
+
+
+
+
+        if (
+          !row ||
+          !newStatus ||
+          oldStatus === newStatus
+        ) {
+
+
+          return;
+
+
+        }
+
+
+
+
+        moveCardLocally(
+          draggedCard,
+          column
+        );
+
+
+
+
+        google.script.run
+
+
+          .withSuccessHandler(() => {
+
+
+            loadBoard();
+
+
+          })
+
+
+          .withFailureHandler(error => {
+
+
+            showError(error);
+
+
+            loadBoard();
+
+
+          })
+
+
+          .updateContentStatus(
+            row,
+            newStatus
+          );
+
+
+      }
+    );
+
+
+  }
+
+
+
+
+  /* =====================================================
+     MOVE CARD LOCALLY
+  ===================================================== */
+
+
+  function moveCardLocally(
+    card,
+    column
+  ) {
+
+
+
+
+    const cards =
+      column.querySelector(
+        '.cards'
+      );
+
+
+
+
+    const empty =
+      cards.querySelector(
+        '.empty'
+      );
+
+
+
+
+    if (empty) {
+
+
+      empty.remove();
+
+
+    }
+
+
+
+
+    cards.appendChild(card);
+
+
+
+
+    const count =
+      column.querySelector(
+        '.count'
+      );
+
+
+
+
+    count.textContent =
+      cards.querySelectorAll(
+        '.card'
+      ).length;
+
+
+  }
+
+
+
+
+  /* =====================================================
+     FIND ITEM
+  ===================================================== */
+
+
+  function findItem(row) {
+
+
+    if (!boardData)
+      return null;
+
+
+
+
+    return boardData.items.find(
+      item =>
+        Number(item.row) ===
+        Number(row)
+    );
+
+
+  }
+
+
+
+
+  /* =====================================================
+     STATISTICS
+  ===================================================== */
+
+
+  function updateStats(items) {
+
+
+
+
+    const total =
+      items.length;
+
+
+
+
+    const published =
+      items.filter(
+        item =>
+          item.status ===
+          'تم النشر'
+      ).length;
+
+
+
+
+    const late =
+      items.filter(
+        item =>
+          item.delay !== '' &&
+          Number(item.delay) > 0 &&
+          item.status !== 'تم النشر'
+      ).length;
+
+
+
+
+    document.getElementById(
+      'total'
+    ).textContent =
+      total;
+
+
+
+
+    document.getElementById(
+      'published'
+    ).textContent =
+      published;
+
+
+
+
+    document.getElementById(
+      'late'
+    ).textContent =
+      late;
+
+
+  }
+
+
+
+
+  /* =====================================================
+     STATUS COLOR
+  ===================================================== */
+
+
+  function getStatusClass(status) {
+
+
+
+
+    if (
+      status ===
+      'تم النشر'
+    )
+      return 'published';
+
+
+
+
+    if (
+      status ===
+      'فكرة'
+    )
+      return 'idea';
+
+
+
+
+    if (
+      status ===
+      'قيد الكتابة'
+    )
+      return 'writing';
+
+
+
+
+    if (
+      status ===
+      'قيد التصميم'
+    )
+      return 'design';
+
+
+
+
+    if (
+      status ===
+      'جاهز للتصميم' ||
+      status ===
+      'بانتظار النشر' ||
+      status ===
+      'بانتظار المراجعة' ||
+      status ===
+      'جاهز للنشر' ||
+      status ===
+      'قيد المراجعة'
+    )
+      return 'ready';
+
+
+
+
+    if (
+      status ===
+      'مؤرشف'
+    )
+      return 'archived';
+
+
+
+
+    if (
+      status ===
+      'ملغي'
+    )
+      return 'cancelled';
+
+
+
+
+    return '';
+
+
+  }
+
+
+
+
+  /* =====================================================
+     ESCAPE HTML
+  ===================================================== */
+
+
+  function escapeHtml(value) {
+
+
+    return String(value)
+
+
+      .replace(
+        /&/g,
+        '&amp;'
+      )
+
+
+      .replace(
+        /</g,
+        '&lt;'
+      )
+
+
+      .replace(
+        />/g,
+        '&gt;'
+      )
+
+
+      .replace(
+        /"/g,
+        '&quot;'
+      )
+
+
+      .replace(
+        /'/g,
+        '&#039;'
+      );
+
+
+  }
+
+
+
+
+  /* =====================================================
+     ERROR
+  ===================================================== */
+
+
+  function showError(error) {
+
+
+    document.getElementById(
+      'app'
+    ).innerHTML = `
+
+
+      <div class="error">
+
+
+        ❌ حدث خطأ:
+
+
+        ${escapeHtml(
+          error?.message ||
+          String(error)
+        )}
+
+
+      </div>
+
+
+    `;
+
+
+  }
+
+
+
+
+  /* =====================================================
+     START
+  ===================================================== */
+
+
+  loadBoard();
+
+
+</script>
+
+
+</body>
+
+
+</html>
